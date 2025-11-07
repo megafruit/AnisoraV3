@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: fastvideo
+Version: 1.2.0
+Summary: FastVideo
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
