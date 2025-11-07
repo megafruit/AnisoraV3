@@ -1,0 +1,11 @@
+## 此提示词用于为单色的第一帧上色
+重要参数:
+1. Stable Diffusion模型选择: AnythingXL_xl.safetensorsn
+2. 分辨率: 1280*720
+3. Sampling steps = 25
+4. CFG = 7
+5. ControlNet: canny算法, weight=1.7, Starting Control Step=0.0, Ending Control Step=1.0, Control mode=My prompt is more important, Low threshold = 100, High threshold = 200
+
+正面提示词: (One white and one black bird sit on a branch near a blue river as the sun rises behind the green mountains:0.8), simple style, (simple background:1.2), (clear outline, closed line, clear eyes, best face, best quality:1.5)
+负面提示词: no color, (bad eyes, no eyeballs, poorly drawn face, rough face, extra limbs:1.5), (badhandv4, easynegative:1.5)
+

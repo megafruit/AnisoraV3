@@ -1,0 +1,10 @@
+## 此提示词用于绘制单色的第一帧
+重要参数:
+1. Stable Diffusion模型选择: realcartoonXL_v7.safetensors
+2. 分辨率: 1280*720
+3. Sampling steps = 20
+4. CFG = 7
+
+正面提示词: (One white and one black bird sit on a branch near a blue river as the sun rises behind the green mountains:1.3), black-and-white comic, (cute, cartoon:1.2), clean outline, sharp edges, (lineart, monochrome:1.4), correct proportions, no overlapping, (masterpiece, best quality:1.7) <lora:LineArtF:0.95>
+负面提示词: duplicate humans, duplicate animals, wrong number of humans, wrong number of animals, furry, wrong species:1.9, (worst face, mutilated face, no eyeball:1.6), hybrid creatures, fused species, bad anatomy, (extra limbs:1.7), duplicate human, detailed background, wrong gender, badhandv4, easynegative
+
