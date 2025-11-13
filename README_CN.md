@@ -15,7 +15,7 @@ Stable Diffusion WebUI（后面简称WebUI），是一个集成式的开源平�
 ##### 百度网盘
 解压缩该压缩包，您能够直接获得WebUI的核心功能组件、必备模型、中文本地化补丁和图库浏览器。请注意！此压缩包只能够在NVDIA卡驱动的电脑上使用。链接如下：
 
-通过网盘分享的文件：sd.webui.zip
+通过网盘分享的文件：sd.webui.zip\n
 链接: https://pan.baidu.com/s/1czxmteAh9Dc0EVagOKa72g?pwd=p8dp 提取码: p8dp
 
 ##### 项目GitHub仓库
