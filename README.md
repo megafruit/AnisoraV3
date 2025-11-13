@@ -1,6 +1,157 @@
-##  🚀 Quick Started
+# README (English Version)
 
-### 1. Environment Set Up
+Hello!  
+This document contains detailed environment setup instructions and a complete introduction to the workflow of this project.  
+If you encounter any issues or have questions about the configuration, please contact: **hxia0469@uni.sydney.edu.au**
+
+---
+
+# Environment Setup
+
+## Stable Diffusion WebUI Setup
+
+### 1. Overview
+Stable Diffusion WebUI (hereinafter “WebUI”) is an integrated open-source platform that uses multiple APIs (Stable Diffusion, ControlNet, LoRA, etc.) to generate AI images.  
+In this project, WebUI generates the first frame, which is used as the reference frame for Anisora.  
+You must install WebUI locally or on a cloud server by yourself.  
+WebUI and Anisora do **not** need to share the same directory or environment.
+
+---
+
+### 2. Download Options
+
+This project does not require extremely high GPU performance. Our team ran it on an RTX 4090.  
+Better GPUs simply accelerate the generation process.
+
+Two installation options are available:
+
+---
+
+#### **Option A: Baidu Cloud Package (Recommended for NVIDIA GPU users)**  
+This package includes the core WebUI components, necessary models, Chinese localization patch, and gallery browser.  
+⚠ It can only be used on machines with **NVIDIA GPUs**.
+
+File: **sd.webui.zip**  
+Link: https://pan.baidu.com/s/1czxmteAh9Dc0EVagOKa72g?pwd=p8dp  
+Extraction code: **p8dp**
+
+---
+
+#### **Option B: Official GitHub Repository**  
+If the Baidu package fails to run, or your PC does not use an NVIDIA GPU, or WebUI cannot be installed due to other issues, use the official repository:
+
+Repository: https://github.com/AUTOMATIC1111/stable-diffusion-webui  
+Installation guide:  
+https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-NVidia-GPUs
+
+---
+
+### 3. Required Extensions and Models
+
+After setting up WebUI, download the required extensions and models.
+
+**Please download all extensions shown checked in the screenshot** (we are unsure which ones were absolutely necessary, so download them all for safety).  
+Install via:
+
+**WebUI → Extensions → Load From → search → install**
+
+<p align="center">
+  <img src="assets/1.png" width="900" />
+</p>
+
+---
+
+### Required Stable Diffusion Models  
+Place in:
+
+```
+./webui/Stable-diffusion
+```
+
+1. **AnythingXL_xl.safetensors**  
+   https://civitai.com/models/9409?modelVersionId=384264
+
+2. **realcartoonXL_v7.safetensors**  
+   https://civitai.com/models/125907/realcartoon-xl
+
+---
+
+### Required LoRA  
+Place in:
+
+```
+./webui/Lora
+```
+
+- **LineArtF.safetensors**  
+  https://civitai.com/models/596934/line-art-style-sdxl-pony
+
+---
+
+### Required Embeddings  
+Place in:
+
+```
+./webui/embeddings
+```
+
+1. **badhandv4.pt**  
+   https://civitai.com/models/16993/badhandv4  
+
+2. **easynegative.safetensors**  
+   https://civitai.com/models/7808/easynegative  
+
+---
+
+### Required ControlNet Model  
+Place in:
+
+```
+./webui/ControlNet
+```
+
+- **controlnet-canny-sdxl-1.0.safetensors**  
+  https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/tree/main  
+
+(You only need this file.)
+
+---
+
+⚠ Due to limited project time, we were unable to explore all WebUI features, so the quality of the generated first frame is not perfect.  
+You may freely experiment with more models and features to pursue higher-quality first-frame output.
+
+---
+
+# Anisora Setup
+
+## 1. Overview
+Anisora is an open-source video-generation system.  
+We analyzed it and implemented several modifications based on your input.  
+Anisora can generate various anime-style video shots.
+
+---
+
+## 2. Download
+
+Anisora requires powerful GPU memory:
+
+- **1 GPU with ≥80 GB VRAM**, or  
+- **Multiple GPUs** (our team used 4 × 48 GB)
+
+Repository:  
+https://github.com/megafruit/AnisoraV3.git
+
+Clone:
+
+```bash
+git clone https://github.com/megafruit/AnisoraV3.git
+```
+
+---
+
+## 3. Environment Setup
+
+Run:
 
 ```bash
 cd anisoraV3
@@ -11,125 +162,213 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-### 2. Download Pretrained Weights
+---
 
-Please download AnisoraV3 checkpoints from [Huggingface](https://huggingface.co/IndexTeam/Index-anisora/tree/main/V3.1)
+## 4. Required Models
 
-```bash
-git lfs install
-git clone https://huggingface.co/IndexTeam/Index-anisora/tree/main/V3.1
+### flash-attn (Flash Attention)
+
+Installing via pip often freezes.  
+Download manually from:  
+https://github.com/Dao-AILab/flash-attention/releases
+
+Use this version:
+
+```
+flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 ```
 
+Place in project root, then install:
 
-### 3. Inference
+```bash
+pip install flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+```
 
-#### Single-GPU Inference 
+---
+
+### AnisoraV3 Checkpoints
+
+Download and place into:
+
+```
+Index-anisora/V3.1
+```
+
+https://huggingface.co/IndexTeam/Index-anisora/tree/main/V3.1
+
+---
+
+### AniLines Pretrained Model
+
+Download from Baidu Cloud and place into:
+
+```
+Index-anisora/AniLines-Anime-Lineart-Extractor/weights
+```
+
+File: **detail.pth**  
+Link: https://pan.baidu.com/s/1KkY_qXgDUM6yA56x5pSITw?pwd=5ph8  
+Extraction code: **5ph8**
+
+---
+
+# Running the Pipeline
+
+Refer to the demonstration video for complete results and workflow.  
+Below we explain the major commands and parameters.
+
+---
+
+## 0. Initial Step  
+Place your natural-language input into:
+
+```
+anisoraV3/data/input_txt/input.txt
+```
+
+---
+
+## 1. Convert `.txt` → JSON → prompt files
+
+Start with:
+
+```bash
+python scene_graph_builder.py
+```
+
+This converts your `.txt` file into a structured JSON file.
+
+Then run:
+
+```bash
+python read_json.py
+```
+
+This generates **three** prompt files:
+
+---
+
+### (1) 1.txt — Prompt for Anisora
+
+Example:
+
+```
+At the beginning (first 1.5 seconds), <your scene sentence 1>. 
+In the same shot (from 1.5s to 5s), <your scene sentence 2>. @@data/inference-imgs/1.png&&0
+```
+
+`@@data/inference-imgs/1.png&&0` defines reference image path and timing.
+
+---
+
+### (2) prompt_for_monochrome_frame.txt — WebUI B&W first frame
+
+Key parameters:
+
+- Model: realcartoonXL_v7.safetensors
+- Resolution: 1280×720
+- Steps: 20
+- CFG: 7
+
+Includes positive & negative prompt templates.
+
+---
+
+### (3) prompt_for_recoloring.txt — WebUI recoloring prompt
+
+Key parameters:
+
+- Model: AnythingXL_xl.safetensors
+- Steps: 25
+- CFG: 7
+- ControlNet canny  
+  - weight=1.7  
+  - thresholds: Low=100, High=200  
+  - Control mode: *My prompt is more important*
+
+Includes templates.
+
+---
+
+## 2. Generate monochrome + recolored first frame using WebUI
+
+Screenshots for reference:
+
+<p align="center">
+  <img src="assets/2.png" width="900" />
+</p>
+
+<p align="center">
+  <img src="assets/3.png" width="900" />
+</p>
+
+---
+
+## 3. Generate video using Anisora
+
+Recommended (single GPU):
 
 ```bash
 python generate-pi-i2v-any.py \
-    --task i2v-14B \
-    --size 1280*720  \
-    --ckpt_dir Wan2.1-I2V-14B-480P \
-    --image output_videos_any \
-    --prompt data/inference_any.txt \
-    --base_seed 4096 \
-    --frame_num 81
-```
-
-#### Multi-GPU Inference
-
-```bash
-torchrun \
-    --nproc_per_node=2 \
-    --master_port 43210 \
-    generate-pi-i2v-any.py \
-    --task i2v-14B \
-    --size 1280*720  \
-    --ckpt_dir Wan2.1-I2V-14B-480P \
-    --image output_videos_any \
-    --prompt data/inference_any.txt \
-    --dit_fsdp \
-    --t5_fsdp \
-    --ulysses_size 2 \
-    --base_seed 4096 \
-    --frame_num 81 \
-    --sample_steps 8 \
-    --sample_shift 5 \
-    --sample_guide_scale 1
-```
-
-### 4. Inference
-
-### 360-Degree Character Rotation
-#### Single-GPU Inference 
-
-```bash
-python generate-pi-i2v-any.py \
-    --task i2v-14B \
-    --size 1280x720 \
-    --ckpt_dir Wan2.1-I2V-14B-480P \
-    --image output_videos_360 \
-    --prompt data/inference_360.txt \
-    --base_seed 4096 \
-    --frame_num 81
-```
-
-#### Multi-GPU Inference
-
-```bash
-torchrun \
-    --nproc_per_node=2 \
-    --master_port 43210 \
-    generate-pi-i2v-any.py \
     --task i2v-14B \
     --size 1280*720 \
-    --ckpt_dir Wan2.1-I2V-14B-480P \
-    --image output_videos_360 \
-    --prompt data/inference_360.txt \
-    --dit_fsdp \
-    --t5_fsdp \
-    --ulysses_size 2 \
-    --base_seed 4096 \
+    --ckpt_dir Index-anisora/V3.1 \
+    --image output_videos_any \
+    --prompt data/prompt/1.txt \
     --frame_num 81 \
-    --sample_steps 8 \
-    --sample_shift 5 \
-    --sample_guide_scale 1
+    --sample_steps 6 \
+    --sample_shift 8 \
+    --sample_guide_scale 1 \
+    --use_prompt_extend \
+    --prompt_extend_method local_qwen \
+    --prompt_extend_target_lang en \
+    --prompt_extend_model QwenVL2.5_7B
 ```
 
-Where,
+Parameter explanations match the Chinese version.
 
-    --prompt 
-    
-    The prompt File Format: image_path@@prompt&&image_position
+---
 
-        One line per case
-        image_position: Temporal position (0=first frame, 0.5=mid frame, 1=last frame)
-        Example (from data/inference_any.txt)
-    
-    --image specifies the output folder  
-    
-    --nproc_per_node and --ulysses_size should both be set to the number of GPUs used for multi-GPU inference.  
-    
-    --ckpt_dir is the root directory of model checkpoint.  
-    
-    --frame_num is the number of frames to infer, at 16fps.
-        81 frames equals about 5 seconds, must satisfy F=8x+1 (x∈Z)
-        360-degree character rotation recommended 5s, to ensure a full circle of 360 degrees.  
-
-    
-#### Prompt Format Specification
-
-Basic Structure
+### Multi-GPU Version (4 GPUs)
 
 ```bash
-[Video description in English Better] + aesthetic score: X.X. motion score: X.X. There is no text in the video.
+torchrun \
+    --nproc_per_node=4 \
+    --master_port 43210 generate-pi-i2v-any.py \
+    --task i2v-14B \
+    --size 1280*720  \
+    --ckpt_dir Index-anisora/V3.1 \
+    --image output_videos_any \
+    --prompt data/prompt/1.txt \
+    --dit_fsdp --t5_fsdp \
+    --ulysses_size 2 \
+    --ring_size 2 \
+    --frame_num 81 \
+    --sample_steps 6 \
+    --sample_shift 8 \
+    --sample_guide_scale 1 \
+    --use_prompt_extend \
+    --prompt_extend_method local_qwen \
+    --prompt_extend_target_lang en \
+    --prompt_extend_model QwenVL2.5_7B
 ```
 
-| Parameter | Recommended Range | Description |
-|-------|-------|-------|
-| Aesthetic Score | 5.0-7.0 | Controls visual quality and cinematic appeal (higher = more cinematic) |
-| Motion Score | 2.0-4.0 | Controls movement intensity (higher values = more dynamic motion) |
-| No Text Clause | Mandatory | Prevents unwanted captions or text overlays in generated videos |
+---
 
-example:  A drone chase sequence through neon-lit city streets at night. aesthetic score: 5.5. motion score: 4.0. There is no text in the video.
+## 4. Convert colored frames → monochrome lineart
 
+Run:
+
+```bash
+python AniLines-Anime-Lineart-Extractor/infer.py
+```
+
+The final outputs will appear in:
+
+```
+anisoraV3/final_output
+```
+
+---
+
+# End of Document
