@@ -28,31 +28,31 @@ Stable Diffusion WebUI（后面简称WebUI），是一个集成式的开源平�
 安装说明：https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-NVidia-GPUs
 
 #### 3. 必要插件下载
-当您配置好项目的基础环境之后，您还需要下载一些必要的功能型插件以及项目必要的模型。
+1) 当您配置好项目的基础环境之后，您还需要下载一些必要的功能型插件以及项目必要的模型。
 下图中我勾选的扩展名请全部下载（我忘记哪些是真正有用的了。。保险起见请下载所有勾选的扩展）。
 这些扩展您可以直接在WebUI的Extension模块下载（WebUI->Extension->点击Load From->搜索扩展并下载即可）。
 <p align="center">
-  <img src="assets/1.png" width="400" />
+  <img src="assets/1.png" width="700" />
   <br>
 </p>
 
-您还需要下载2种项目中必要的Stable Diffusion模型，并放置在“./webui/Stable-diffusion”中。
+2) 您还需要下载2种项目中必要的Stable Diffusion模型，并放置在“./webui/Stable-diffusion”中。
 
 文件名1: AnythingXL_xl.safetensors --下载地址: https://civitai.com/models/9409?modelVersionId=384264
 
 文件名2: realcartoonXL_v7.safetensors --下载地址: https://civitai.com/models/125907/realcartoon-xl
 
-您还需要下载1种项目中必要的LoRA模型，并放置在“./webui/Lora”中。
+3) 您还需要下载1种项目中必要的LoRA模型，并放置在“./webui/Lora”中。
 
 文件名: LineArtF.safetensors --下载地址: https://civitai.com/models/596934/line-art-style-sdxl-pony
 
-您还需要下载2种项目中必要的Embeddings模型，并放置在“./webui/embeddings”中。下载地址如下：
+4) 您还需要下载2种项目中必要的Embeddings模型，并放置在“./webui/embeddings”中。下载地址如下：
 
 文件名1: badhandv4.pt --下载地址: https://civitai.com/models/16993/badhandv4
 
 文件名2: easynegative.safetensors --下载地址: https://civitai.com/models/7808/easynegative
 
-您还需要下载1种项目中必要的ControlNet模型，并放置在“./webui/ControlNet”中。下载地址如下：
+5) 您还需要下载1种项目中必要的ControlNet模型，并放置在“./webui/ControlNet”中。下载地址如下：
 
 文件名: controlnet-canny-sdxl-1.0.safetensors --下载地址: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/tree/main (只需要下载controlnet-canny-sdxl-1.0.safetensors即可)
 
@@ -91,11 +91,13 @@ pip install -e .
 pip install flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 ```
 
-**AnisoraV3 checkpoints**: 请在Huggingface上下载完整的AnisoraV3 checkpoints。
-下载地址: https://huggingface.co/IndexTeam/Index-anisora/tree/main/V3.1 放置在Index-anisora/V3.1中
+**AnisoraV3 checkpoints**: 请在Huggingface上下载完整的AnisoraV3 checkpoints，并放置在Index-anisora/V3.1中。
+
+下载地址: https://huggingface.co/IndexTeam/Index-anisora/tree/main/V3.1
 
 **AniLines-Anime-Lineart-Extractor的预训练模型**：请在百度网盘上下载我分享的weight，该weight用于从动画中提取线稿。
 请将该模型保存在Index-anisora/AniLines-Anime-Lineart-Extractor/weights
+
 通过网盘分享的文件：detail.pth
 链接: https://pan.baidu.com/s/1KkY_qXgDUM6yA56x5pSITw?pwd=5ph8 提取码: 5ph8
 
@@ -104,7 +106,7 @@ pip install flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.
 
 ### 0. 在流程开始前，请将您的自然语言文本保存在anisoraV3/data/input_txt/input.txt文件中。
 
-### 1. 将txt文件转化为对应格式的提示词.txt文件
+### 1. 将.txt文件转化为对应格式的提示词.txt文件
 
 ```bash
 python scene_graph_builder.py
@@ -122,8 +124,7 @@ In the same shot (from 1.5s to 5s), <你的场景句2>. @@data/inference-imgs/1.
 ```
 1.txt用于指导Anisora的视频生成。其中，“@@data/inference-imgs/1.png&&0”代表了参考图的存放位置和指导时机，也是包含在模板中的。
 
-**prompt_for_monochrome_frame.txt**：
-## 此提示词用于绘制单色的第一帧
+**prompt_for_monochrome_frame.txt**：此提示词用于绘制单色的第一帧
 ```bash
 重要参数:
 1. Stable Diffusion模型选择: realcartoonXL_v7.safetensors
@@ -139,8 +140,7 @@ furry, wrong species:1.9, (worst face, mutilated face, no eyeball:1.6), hybrid c
 bad anatomy, (extra limbs:1.7), duplicate human, detailed background, wrong gender, badhandv4, easynegative
 ```
 prompt_for_monochrome_frame.txt用于WebUI端的单色第一帧生成。具体如何使用该提示词模板可以看参考视频或者下一步的演示。
-**prompt_for_recoloring.txt**：
-## 此提示词用于为单色的第一帧上色
+**prompt_for_recoloring.txt**：此提示词用于为单色的第一帧上色
 ```bash
 重要参数:
 1. Stable Diffusion模型选择: AnythingXL_xl.safetensorsn
@@ -158,13 +158,13 @@ prompt_for_recoloring.txt用于在WebUI端为单色第一帧上色。具体如�
 ### 2. 使用WebUI（Stable Diffusion）生成单色第一帧+ ControlNet改色之后的第一帧（1.png）
 这张图展示了如何在WebUI上配置prompt_for_monochrome_frame.txt的主要参数。
 <p align="center">
-  <img src="assets/2.png" width="400" />
+  <img src="assets/2.png" width="700" />
   <br>
 </p>
 
 这张图展示了如何在WebUI上配置prompt_for_recoloring.txt的主要参数。注意，重点展示了ControlNet的相关参数，其他部分的配置方法和上图一样。
 <p align="center">
-  <img src="assets/3.png" width="400" />
+  <img src="assets/3.png" width="700" />
   <br>
 </p>
 
