@@ -69,7 +69,7 @@ Install via:
 Place in:
 
 ```
-./webui/Stable-diffusion
+./webui/models/Stable-diffusion
 ```
 
 1. **AnythingXL_xl.safetensors**  
@@ -84,7 +84,7 @@ Place in:
 Place in:
 
 ```
-./webui/Lora
+./webui/models/Lora
 ```
 
 - **LineArtF.safetensors**  
@@ -111,7 +111,7 @@ Place in:
 Place in:
 
 ```
-./webui/ControlNet
+./webui/models/ControlNet
 ```
 
 - **controlnet-canny-sdxl-1.0.safetensors**  

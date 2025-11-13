@@ -37,13 +37,13 @@ Stable Diffusion WebUI（后面简称WebUI），是一个集成式的开源平�
   <br>
 </p>
 
-**您还需要下载2种项目中必要的Stable Diffusion模型，并放置在./webui/Stable-diffusion中**：
+**您还需要下载2种项目中必要的Stable Diffusion模型，并放置在./webui/models/Stable-diffusion中**：
 
 文件名1: AnythingXL_xl.safetensors --下载地址: https://civitai.com/models/9409?modelVersionId=384264
 
 文件名2: realcartoonXL_v7.safetensors --下载地址: https://civitai.com/models/125907/realcartoon-xl
 
-**您还需要下载1种项目中必要的LoRA模型，并放置在./webui/Lora中**：
+**您还需要下载1种项目中必要的LoRA模型，并放置在./webui/models/Lora中**：
 
 文件名: LineArtF.safetensors --下载地址: https://civitai.com/models/596934/line-art-style-sdxl-pony
 
@@ -53,7 +53,7 @@ Stable Diffusion WebUI（后面简称WebUI），是一个集成式的开源平�
 
 文件名2: easynegative.safetensors --下载地址: https://civitai.com/models/7808/easynegative
 
-**您还需要下载1种项目中必要的ControlNet模型，并放置在./webui/ControlNet中**：
+**您还需要下载1种项目中必要的ControlNet模型，并放置在./webui/models/ControlNet中**：
 
 文件名: controlnet-canny-sdxl-1.0.safetensors --下载地址: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/tree/main (只需要下载controlnet-canny-sdxl-1.0.safetensors即可)
 
