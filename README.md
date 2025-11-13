@@ -1,4 +1,8 @@
 # README (English Version)
+⚠ I tried ChatGPT to help me directly translate the Chinese version to English one. But after I reading the English version, I
+was incredibly envious of ChatGPT's features. It retained my original meaning while refining the structure so much that I had no idea 
+how to modify this version. So, if you want to read the README written by me, I suggest you visit the Chinese version. The advantage is 
+that you can truly understand my thought process, but the disadvantage is that the structure is simple, which will reduce the reading comfort.
 
 Hello!  
 This document contains detailed environment setup instructions and a complete introduction to the workflow of this project.  
@@ -325,7 +329,48 @@ python generate-pi-i2v-any.py \
     --prompt_extend_model QwenVL2.5_7B
 ```
 
-Parameter explanations match the Chinese version.
+Where,
+
+    --task  
+        Please keep the default value: i2v-14B.
+    
+    --size  
+        Can be adjusted as needed, but only specific fixed aspect ratios are supported.
+    
+    --ckpt_dir  
+        Directory where the AnisoraV3 checkpoint models are stored.
+    
+    --image  
+        Directory where the output video frames will be saved.
+    
+    --prompt  
+        Path to the prompt file (1.txt).
+    
+    --frame_num  
+        Number of frames to generate.  
+        Since the output video runs at a fixed 16 FPS, this value must be “a multiple of 16 + 1”.
+    
+    --sample_steps  
+        Number of sampling iterations per frame.  
+        **Adjust this based on your quality requirements.**
+    
+    --sample_shift  
+        The amount of shift between consecutive frames.  
+        Higher values produce stronger visual changes between frames.  
+        **Tune this parameter to obtain the best visual quality.**
+    
+    --sample_guide_scale  
+        Controls how strictly the video generation follows the prompt.  
+        Higher values enforce closer adherence to the prompt.  
+        **Adjust as needed to achieve optimal quality.**
+    
+    --use_prompt_extend  
+    --prompt_extend_method  
+    --prompt_extend_target_lang  
+    --prompt_extend_model  
+        Please keep these four parameters as provided, or remove them entirely.  
+        These options enable the QwenVL2.5_7B prompt extension model, which enriches simple prompts and generally improves visual stability and overall video quality.
+
 
 ---
 
@@ -368,7 +413,3 @@ The final outputs will appear in:
 ```
 anisoraV3/final_output
 ```
-
----
-
-# End of Document
